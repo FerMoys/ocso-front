@@ -16,6 +16,8 @@ export default function LoginPage(){
             const { data } = await axios.post(`${API_URL}/auth/login`, {
                 userEmail,      
                 userPassword
+            }, {
+                withCredentials:true,
             });
             
             console.log("Login exitoso:", data);

@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { API_URL, TOKEN_NAME } from "@/app/constants";
 import { Location } from "@/entities";
 import SelectLocation from "./_components/SelectLocations";
+import LocationCard from "./_components/LocationCard";
 
 const LocationsPage = async ({
   searchParams,
@@ -48,6 +49,9 @@ const LocationsPage = async ({
       <div className="w-full">
         <div className="w-full max-w-md">
           <SelectLocation locations={data} store={store} />
+        </div>
+        <div>
+          <LocationCard store={store}/>
         </div>
       </div>
     );

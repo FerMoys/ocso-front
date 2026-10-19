@@ -1,23 +1,31 @@
+
 import Header from "./_components/Header";
 import Sidebar from "./_components/_sidebar/Sidebar";
 
 export default function LayoutDashboard({
   children,
-  count
+  locations,
 }: Readonly<{
   children: React.ReactNode;
-  count: React.ReactNode;
+  locations: React.ReactNode;
 }>) {
   return (
-    <div className="h-dvh w-full bg-[#F74C39] flex flex-col overflow-hidden">
+    <div className="flex h-dvh w-full flex-col overflow-hidden bg-[#F74C39]">
       <Header />
 
-      <div className="flex flex-1 min-h-0 w-full">
+      <div className="flex min-h-0 w-full flex-1">
         <Sidebar />
 
-        <main className="flex-1 min-w-0 min-h-0 bg-white p-6 overflow-y-auto">
-          {children}
-          {count}
+        <main className="min-w-0 flex-1 overflow-y-auto bg-white p-6">
+          <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
+            <section className="min-w-0">
+              {locations}
+            </section>
+
+            <section className="min-w-0">
+              {children}
+            </section>
+          </div>
         </main>
       </div>
     </div>

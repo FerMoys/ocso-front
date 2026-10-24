@@ -21,6 +21,8 @@ export default function DeleteLocationButton({
         type="submit"
             className="h-12 w-full bg-[#F74C39] text-base font-semibold text-white shadow-md transition-all hover:bg-[#DF3D2C] hover:shadow-lg sm:w-auto sm:min-w-48"
             radius="lg"
+            name="deleteValue"
+            value={store}
         >
         Borrar tienda
       </Button>

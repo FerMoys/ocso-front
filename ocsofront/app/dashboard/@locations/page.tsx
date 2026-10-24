@@ -6,6 +6,7 @@ import SelectLocation from "./_components/SelectLocations";
 import LocationCard from "./_components/LocationCard";
 import FormNewLocation from "./_components/FormNewLocation";
 import DeleteLocationButton from "./_components/DeleteLocationButton";
+import { authHeaders} from "@/helpers/authHeaders";
 
 const LocationsPage = async ({
   searchParams,
@@ -30,7 +31,7 @@ const LocationsPage = async ({
       `${API_URL}/locations`,
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          ...authHeaders()
         },
       }
     );

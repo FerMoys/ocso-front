@@ -1,5 +1,6 @@
 import { API_URL, TOKEN_NAME } from "@/app/constants";
 import { Location } from "@/entities";
+import { authHeaders } from "@/helpers/authHeaders";
 import { Card, CardHeader, CardBody, Divider } from "@nextui-org/react";
 import axios from "axios";
 import { cookies } from "next/headers";
@@ -36,7 +37,7 @@ export default async function LocationCard({store}: {store: string | string[] | 
     `${API_URL}/locations/${store}`,
     {
         headers: {
-        Authorization: `Bearer ${token}`,
+        ...authHeaders()
         },
     }
     );

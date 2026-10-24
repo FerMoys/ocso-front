@@ -5,6 +5,7 @@ import { Location } from "@/entities";
 import SelectLocation from "./_components/SelectLocations";
 import LocationCard from "./_components/LocationCard";
 import FormNewLocation from "./_components/FormNewLocation";
+import DeleteLocationButton from "./_components/DeleteLocationButton";
 
 const LocationsPage = async ({
   searchParams,
@@ -54,7 +55,8 @@ const LocationsPage = async ({
         <div>
           <LocationCard store={store}/>
         </div>
-        <FormNewLocation/>
+        <FormNewLocation store={store}/>
+        <DeleteLocationButton store={store}/>
       </div>
     );
   } catch (error) {

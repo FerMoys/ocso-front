@@ -4,6 +4,7 @@ import { API_URL, TOKEN_NAME } from "@/app/constants";
 import { Location } from "@/entities";
 import SelectLocation from "./_components/SelectLocations";
 import LocationCard from "./_components/LocationCard";
+import FormNewLocation from "./_components/FormNewLocation";
 
 const LocationsPage = async ({
   searchParams,
@@ -24,7 +25,7 @@ const LocationsPage = async ({
   }
 
   try {
-    const { data } = await axios.get<Location[]>(
+    let { data } = await axios.get<Location[]>(
       `${API_URL}/locations`,
       {
         headers: {
@@ -53,6 +54,7 @@ const LocationsPage = async ({
         <div>
           <LocationCard store={store}/>
         </div>
+        <FormNewLocation/>
       </div>
     );
   } catch (error) {

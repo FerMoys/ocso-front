@@ -20,7 +20,7 @@ export interface Employee{
 }
 
 export interface Manager{
-  managerId: string;
+    managerId: string;
     managerFullName: string;
     managerSalary: number;
     managerEmail: string;

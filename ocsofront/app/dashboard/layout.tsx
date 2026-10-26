@@ -1,4 +1,5 @@
-
+"use client";
+import { usePathname } from "next/navigation";
 import Header from "./_components/Header";
 import Sidebar from "./_components/_sidebar/Sidebar";
 
@@ -9,6 +10,7 @@ export default function LayoutDashboard({
   children: React.ReactNode;
   locations: React.ReactNode;
 }>) {
+  const path = usePathname()
   return (
     <div className="flex h-dvh w-full flex-col overflow-hidden bg-[#F74C39]">
       <Header />
@@ -24,6 +26,7 @@ export default function LayoutDashboard({
 
             <section className="min-w-0">
               {children}
+              {path === "/dashboard" ? locations : null}
             </section>
           </div>
         </main>

@@ -7,9 +7,10 @@ import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function updateLocation(
+    store: string,
   formData: FormData
 ): Promise<void> {
-  const locationId = formData.get("locationId");
+  const locationId = store;
 
   if (typeof locationId !== "string" || !locationId.trim()) {
     throw new Error("No se especificó la tienda que se desea actualizar.");

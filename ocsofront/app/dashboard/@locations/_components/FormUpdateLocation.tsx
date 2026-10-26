@@ -48,19 +48,15 @@ export default async function FormUpdateLocation({
   );
 
   const [lat, lng] = foundLocation.locationLatLng ?? [0, 0];
+    const updateWithStoreId = updateLocation.bind(null, store);
 
-  return (
-    <div className="flex flex-wrap items-center gap-3">
+return (
+  <div className="flex flex-wrap items-center gap-3">
     <UpdateLocation>
       <form
-        action={updateLocation}
+        action={updateWithStoreId}
         className="mx-auto w-full space-y-6 rounded-2xl bg-white"
       >
-        <input
-          type="hidden"
-          name="locationId"
-          value={String(foundLocation.locationId)}
-        />
 
         <div className="flex items-center gap-4 border-b border-gray-100 pb-5">
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-red-50 text-2xl">

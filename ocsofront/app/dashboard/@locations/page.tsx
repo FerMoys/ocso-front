@@ -1,5 +1,3 @@
-import axios from "axios";
-import { cookies } from "next/headers";
 import { API_URL, TOKEN_NAME } from "@/app/constants";
 import { Location } from "@/entities";
 import SelectLocation from "./_components/SelectLocations";
@@ -15,26 +13,18 @@ const LocationsPage = async ({
     [key: string]: string | string[] | undefined;
   }>;
 }) => {
-  const cookieStore = await cookies();
-  const token = cookieStore.get(TOKEN_NAME)?.value;
-
-  if (!token) {
-    return (
-      <p className="text-red-500">
-        No se encontró la sesión. Inicia sesión nuevamente.
-      </p>
-    );
-  }
 
   try {
-    let { data } = await axios.get<Location[]>(
+    let response = await fetch(
       `${API_URL}/locations`,
       {
         headers: {
           ...authHeaders()
         },
+        next:{tags:["dashboard:locations"]}
       }
     );
+    let data:Location[] = await response.json()
 
     if (!Array.isArray(data) || data.length === 0) {
       return (
@@ -61,15 +51,6 @@ const LocationsPage = async ({
       </div>
     );
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.error(
-        "Error al obtener tiendas:",
-        error.response?.status,
-        error.response?.data
-      );
-    } else {
-      console.error("Error inesperado:", error);
-    }
 
     return (
       <p className="text-red-500">

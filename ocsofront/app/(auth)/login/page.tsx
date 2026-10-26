@@ -1,8 +1,7 @@
 'use client';
 import { API_URL } from "@/app/constants";
-import { Button, Spinner } from "@nextui-org/react";
+import { Button} from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
-import axios from "axios";
 import Link from "next/link"; 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -10,35 +9,29 @@ import { useState } from "react";
 export default function LoginPage(){
     const [submitting, setSubmitting] = useState(false)
     const router = useRouter();
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: any) => {
          e.preventDefault();
         setSubmitting(true);
 
         try {
             const formData = new FormData(e.currentTarget);
-            const userEmail = formData.get("userEmail");
-            const userPassword = formData.get("userPassword");
-            const response = await axios.post(`${API_URL}/auth/login`, {
-                userEmail,      
-                userPassword
-            }, {
-                withCredentials:true,
+            let authData: any = {}
+            authData.userEmail = formData.get("userEmail")
+            authData.userPassword = formData.get("userPassword")
+
+            const response = await fetch(`${API_URL}/auth/login`, {
+                method:"POST",
+                body: JSON.stringify(authData),
+                credentials: 'include'
             });
             console.log('Estado:', response.status);
             console.log('Antes de redirigir');
             router.push('/dashboard');
             console.log("Login exitoso:", response);
+            if (response.status === 201) router.push('/dashboard');
             setSubmitting(false);
-        } catch (error) {
+        } catch (e) {
             setSubmitting(false);
-             if (axios.isAxiosError(error)) {
-                console.error(
-                    "Errores de validación:",
-                    JSON.stringify(error.response?.data, null, 2)
-                );
-            } else {
-                console.error(error);
-            }
         }
     }
 

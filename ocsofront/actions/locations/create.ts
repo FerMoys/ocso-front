@@ -2,15 +2,12 @@
 "use server";
 
 import { API_URL, TOKEN_NAME } from "@/app/constants";
-import axios from "axios";
 import { cookies } from "next/headers";
+import { authHeaders } from "@/helpers/authHeaders";
+import { revalidateTag } from "next/cache";
 
 export async function createLocation(formData: FormData): Promise<void> {
-  const token = cookies().get(TOKEN_NAME)?.value;
 
-  if (!token) {
-    throw new Error("No se encontró la sesión. Inicia sesión nuevamente.");
-  }
 
   const location: Record<string, string> = {};
   const locationLatLng = [0, 0];
@@ -29,16 +26,13 @@ export async function createLocation(formData: FormData): Promise<void> {
     }
   }
 
-  await axios.post(
-    `${API_URL}/locations`,
-    {
-      ...location,
-      locationLatLng,
-    },
-    {
+  const response = await fetch(`${API_URL}/locations`, {
+      method: 'POST',
+      body: JSON.stringify(location, locationLatLng),
       headers: {
-        Authorization: `Bearer ${token}`,
-      },
+          ...authHeaders()
+      }
     }
   );
+  if (response.status === 201) revalidateTag("dashboard:locations");
 }

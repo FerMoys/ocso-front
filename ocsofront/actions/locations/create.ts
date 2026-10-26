@@ -1,15 +1,13 @@
 
 "use server";
 
-import { API_URL, TOKEN_NAME } from "@/app/constants";
-import { cookies } from "next/headers";
+import { API_URL } from "@/app/constants";
 import { authHeaders } from "@/helpers/authHeaders";
 import { revalidateTag } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function createLocation(formData: FormData): Promise<void> {
-
-
-  const location: Record<string, string> = {};
+  const location: Record<string, string | number[]> = {};
   const locationLatLng = [0, 0];
 
   for (const [key, value] of formData.entries()) {
@@ -26,13 +24,30 @@ export async function createLocation(formData: FormData): Promise<void> {
     }
   }
 
+  location.locationLatLng = locationLatLng;
+
   const response = await fetch(`${API_URL}/locations`, {
-      method: 'POST',
-      body: JSON.stringify(location, locationLatLng),
-      headers: {
-          ...authHeaders()
-      }
-    }
-  );
-  if (response.status === 201) revalidateTag("dashboard:locations");
+    method: "POST",
+    body: JSON.stringify(location),
+    headers: {
+      "Content-Type": "application/json",
+      ...authHeaders(),
+    },
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    const errorMessage = await response.text();
+
+    throw new Error(
+      `No se pudo crear la tienda (${response.status}): ${errorMessage}`
+    );
+  }
+
+  const createdLocation: { locationId: string | number } =
+    await response.json();
+
+  revalidateTag("dashboard:locations");
+
+  redirect(`/dashboard?store=${encodeURIComponent(String(createdLocation.locationId))}`);
 }

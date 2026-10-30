@@ -14,7 +14,7 @@ export default async function EmployeesLocation({
             {
                 method: "GET",
                 headers:{
-                ...authHeaders()
+                ...(await authHeaders())
             },
             next:{
                 tags:["dashboard:locations", "dashboard:locations:employees"]

@@ -20,9 +20,9 @@ export default function LayoutDashboard({
 
         <main className="min-w-0 flex-1 overflow-y-auto bg-white p-6">
           <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
-            <section className="min-w-0">
+{  /**           <section className="min-w-0">
               {locations}
-            </section>
+            </section>*/}
 
             <section className="min-w-0">
               {children}

@@ -15,11 +15,11 @@ export default async function FormNewLocation({
 
   const [responseManagers, responseLocations] = await Promise.all([
     fetch(`${API_URL}/managers`, {
-      headers: authHeaders(),
+      headers: (await authHeaders()),
       next: {tags: ["dashboard:managers"]},
     }),
     fetch(`${API_URL}/locations`, {
-      headers: authHeaders(),
+      headers: (await authHeaders()),
       next: {tags: ["dashboard:locations"]},
     }),
   ]);

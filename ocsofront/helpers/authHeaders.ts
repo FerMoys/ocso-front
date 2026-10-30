@@ -1,10 +1,10 @@
-
 import { TOKEN_NAME } from "@/app/constants";
 import { cookies } from "next/headers";
 import { cache } from "react";
 
-export const authHeaders = cache(() => {
-  const cookieValue = cookies().get(TOKEN_NAME)?.value;
+export const authHeaders = cache(async () => {
+  const cookieStore = await cookies();
+  const cookieValue = cookieStore.get(TOKEN_NAME)?.value;
 
   if (!cookieValue) {
     throw new Error("No se encontró la sesión. Inicia sesión nuevamente.");

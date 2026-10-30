@@ -44,7 +44,7 @@ export async function updateLocation(
       body: JSON.stringify(location),
       headers: {
         "Content-Type": "application/json",
-        ...authHeaders(),
+        ...(await authHeaders()),
       },
       cache: "no-store",
     }

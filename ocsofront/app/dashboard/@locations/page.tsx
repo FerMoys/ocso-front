@@ -20,7 +20,7 @@ const LocationsPage = async ({
       `${API_URL}/locations`,
       {
         headers: {
-          ...authHeaders()
+          ...(await authHeaders())
         },
         next:{tags:["dashboard:locations"]}
       }

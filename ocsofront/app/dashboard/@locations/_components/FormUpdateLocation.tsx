@@ -16,11 +16,11 @@ export default async function FormUpdateLocation({
 
   const [responseManagers, responseLocations] = await Promise.all([
     fetch(`${API_URL}/managers`, {
-      headers: authHeaders(),
+      headers: await authHeaders(),
       next: { tags: ["dashboard:managers"] },
     }),
     fetch(`${API_URL}/locations`, {
-      headers: authHeaders(),
+      headers: await authHeaders(),
       next: { tags: ["dashboard:locations"] },
     }),
   ]);

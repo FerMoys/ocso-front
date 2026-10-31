@@ -21,14 +21,16 @@ export default function LayoutDashboard({
                 <Sidebar />
 
                 <main className="min-w-0 flex-1 overflow-y-auto bg-white p-6">
+                  <div className="w-full min-w-0">
+                      {children}
 
-                    <div className="w-full min-w-0">
-                        {children}
-
-                        {path === "/dashboard" ? locations : null}
-                    </div>
-
-                </main>
+                      {path === "/dashboard" && (
+                          <section className="w-full mt-6">
+                              {locations}
+                          </section>
+                      )}
+                  </div>
+              </main>
             </div>
         </div>
     );

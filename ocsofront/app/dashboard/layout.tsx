@@ -1,36 +1,35 @@
 "use client";
+
 import { usePathname } from "next/navigation";
 import Header from "./_components/Header";
 import Sidebar from "./_components/_sidebar/Sidebar";
 
 export default function LayoutDashboard({
-  children,
-  locations,
+    children,
+    locations,
 }: Readonly<{
-  children: React.ReactNode;
-  locations: React.ReactNode;
+    children: React.ReactNode;
+    locations: React.ReactNode;
 }>) {
-  const path = usePathname()
-  return (
-    <div className="flex h-dvh w-full flex-col overflow-hidden bg-[#F74C39]">
-      <Header />
+    const path = usePathname();
 
-      <div className="flex min-h-0 w-full flex-1">
-        <Sidebar />
+    return (
+        <div className="flex h-dvh w-full flex-col overflow-hidden bg-[#F74C39]">
+            <Header />
 
-        <main className="min-w-0 flex-1 overflow-y-auto bg-white p-6">
-          <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
-{  /**           <section className="min-w-0">
-              {locations}
-            </section>*/}
+            <div className="flex min-h-0 w-full flex-1">
+                <Sidebar />
 
-            <section className="min-w-0">
-              {children}
-              {path === "/dashboard" ? locations : null}
-            </section>
-          </div>
-        </main>
-      </div>
-    </div>
-  );
+                <main className="min-w-0 flex-1 overflow-y-auto bg-white p-6">
+
+                    <div className="w-full min-w-0">
+                        {children}
+
+                        {path === "/dashboard" ? locations : null}
+                    </div>
+
+                </main>
+            </div>
+        </div>
+    );
 }

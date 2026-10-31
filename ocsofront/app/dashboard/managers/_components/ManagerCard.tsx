@@ -41,10 +41,10 @@ export default async function ManagerCard() {
                                 <Divider />
 
                                 <CardBody className="py-3">
-                                    <p className="text-sm text-gray-600 w-full">
+                                    <p className="text-large text-gray-600 w-full">
                                         Email: <b>{manager.managerEmail}</b>
                                     </p>
-                                    <p className="text-sm text-gray-600 w-full mt-1">
+                                    <p className="text-large text-gray-600 w-full mt-1">
                                         Teléfono: <b>{manager.managerPhoneNumber}</b>
                                     </p>
                                 </CardBody>

@@ -16,21 +16,29 @@ export default async function FormUpdateManager({manager}: {manager: Manager}){
         <form action={updateManagerWithId}>
             <h1> Actualizar manager</h1>
             <Input
+                isRequired
+                label="Nombre completo"
                 defaultValue={manager.managerFullName}
                 placeholder="Marco Aurelio"
                 name="managerFullName"
             />
             <Input
+                isRequired
+                label="Correo electrónico"
                 defaultValue={manager.managerEmail}
                 placeholder="manager@ocso.com"
                 name="managerEmail"
             />
             <Input
+                required={true}
+                label="Salario"
                 defaultValue={String(manager.managerSalary)}
                 placeholder="123000"
                 name="managerSalary"
             />
             <Input
+                isRequired
+                label="Número de teléfono"
                 defaultValue={manager.managerPhoneNumber}
                 placeholder="4421435679"
                 name="managerPhoneNumber"

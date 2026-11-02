@@ -1,14 +1,15 @@
+// app/dashboard/managers/[id]/page.tsx
 import { API_URL } from "@/app/constants";
 import { Manager } from "@/entities";
 import { authHeaders } from "@/helpers/authHeaders";
 import ManagerDetailPage from "../_components/ManagerDetailPage";
+import FormUpdateManager from "../_components/FormUpdateManager";
+import UpdateManager from "../_components/UpdateManager";
 
 export default async function ManagerPage({
     params,
 }: {
-    params: Promise<{
-        id: string;
-    }>;
+    params: Promise<{ id: string }>;
 }) {
     const { id } = await params;
 
@@ -25,11 +26,15 @@ export default async function ManagerPage({
         throw new Error("No se pudo obtener la información del gerente");
     }
 
-    const data: Manager = await response.json();
+    const manager: Manager = await response.json();
 
     return (
-        <div className="w-full flex flex-col gap-4">
-            <ManagerDetailPage manager={data} />
+        <div className="w-full flex flex-col gap-6">
+            <UpdateManager> 
+                <FormUpdateManager manager={manager} />
+            </UpdateManager>
+            <ManagerDetailPage manager={manager} />
+            
         </div>
     );
 }

@@ -45,6 +45,9 @@ export default async function ManagerCard() {
                                         Email: <b>{manager.managerEmail}</b>
                                     </p>
                                     <p className="text-large text-gray-600 w-full mt-1">
+                                        Salario: <b>{manager.managerSalary}</b>
+                                    </p>
+                                    <p className="text-large text-gray-600 w-full mt-1">
                                         Teléfono: <b>{manager.managerPhoneNumber}</b>
                                     </p>
                                 </CardBody>

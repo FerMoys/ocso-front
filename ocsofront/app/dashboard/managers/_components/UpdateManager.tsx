@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
+import {LuPenLine} from "react-icons/lu"
 import {
   Button,
   Modal,
@@ -21,12 +22,10 @@ export default function UpdateManager({
 
   return (
     <>
-      <Button
-        className="h-12 bg-[#F74C39] text-base font-semibold text-white shadow-md transition-all hover:bg-[#DF3D2C] hover:shadow-lg"
-        radius="lg"
+      <Button color="primary"
         onPress={() => setIsOpen(true)}
       >
-        Actualizar manager
+        <LuPenLine size="20"/>
       </Button>
 
       <Modal

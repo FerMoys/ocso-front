@@ -9,6 +9,8 @@ import {
 } from "@nextui-org/react";
 import Link from "next/link";
 import DeleteManagerButton from "../_components/DeleteManagerButton";
+import UpdateManager from "./UpdateManager";
+import FormUpdateManager from "./FormUpdateManager";
 
 export default function ManagerDetailPage({
     manager,
@@ -90,10 +92,13 @@ export default function ManagerDetailPage({
             <Divider />
 
             {/* Botón para eliminar */}
-            <CardFooter className="flex justify-end bg-default-50 px-6 py-3">
+            <CardFooter className="flex justify-end bg-default-50 px-6 py-3 gap-4">
                 <DeleteManagerButton
                     managerId={manager.managerId}
                 />
+                <UpdateManager> 
+                <FormUpdateManager manager={manager} />
+                </UpdateManager>
             </CardFooter>
 
         </Card>

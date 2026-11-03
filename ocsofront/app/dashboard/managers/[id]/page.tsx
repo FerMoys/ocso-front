@@ -30,9 +30,7 @@ export default async function ManagerPage({
 
     return (
         <div className="w-full flex flex-col gap-6">
-            <UpdateManager> 
-                <FormUpdateManager manager={manager} />
-            </UpdateManager>
+            
             <ManagerDetailPage manager={manager} />
             
         </div>

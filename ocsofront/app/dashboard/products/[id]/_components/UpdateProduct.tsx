@@ -50,7 +50,7 @@ export default function UpdateProduct({ product, providers }: { product: Product
             <Button 
                 color="primary" 
                 type="submit"
-                className="bg-[#FFB336] text-black font-semibold mt-2"
+                className=" text-white font-semibold mt-2"
             >
                 Actualizar Producto
             </Button>

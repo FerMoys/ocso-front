@@ -9,7 +9,7 @@ export default async function updateProvider(providerId: string, formData: FormD
     for (const key of formData.keys()){
         provider[key] = formData.get(key)
     }
-    const response = await fetch(`${API_URL}/providers`, {
+    const response = await fetch(`${API_URL}/providers/${providerId}`, {
         method: "PATCH",
         body: JSON.stringify(provider),
         headers: {
@@ -18,5 +18,8 @@ export default async function updateProvider(providerId: string, formData: FormD
         },
     })
 
-    if(response.status ===200) revalidateTag("dashboard:providers")
+    if(response.ok) {
+        revalidateTag("dashboard:providers");
+        revalidateTag(`dashboard:providers:${providerId}`);
+    }
 }

@@ -1,6 +1,7 @@
 import updateProvider from "@/actions/providers/update";
 import { Provider } from "@/entities";
 import { Input, Button } from "@nextui-org/react";
+import DeleteProviderButton from "../../_components/DeleteProvider";
 
 export default function FormUpdateProvider({provider}:{provider: Provider}){
     const {providerId} = provider;
@@ -15,7 +16,7 @@ export default function FormUpdateProvider({provider}:{provider: Provider}){
                         label="Nombre completo"
                         defaultValue={provider.providerName}
                         placeholder="Marco Aurelio"
-                        name="providerFullName"
+                        name="providerName"
                     />
                     <Input className="max-w-[250px]"
                         isRequired
@@ -34,6 +35,7 @@ export default function FormUpdateProvider({provider}:{provider: Provider}){
                     <Button color="primary" type="submit">
                         Actualizar
                     </Button>
+                    <DeleteProviderButton providerId={provider.providerId}/>
                 </form>
     )
 }

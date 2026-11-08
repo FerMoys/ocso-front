@@ -1,21 +1,22 @@
 import { API_URL } from "@/app/constants";
-import { Product } from "@/entities";
+import { Provider } from "@/entities";
 import { authHeaders } from "@/helpers/authHeaders";
-import FilteredCards from "./[id]/_components/FilteredCards";
+import FormCreateProduct from "./[id]/_components/FormCreateProduct";
 
-const ProductsPage = async () => {
-    const response = await fetch(`${API_URL}/products`, {
+export default async function ProductsPage() {
+    const responseProviders = await fetch(`${API_URL}/providers`, {
         headers: {
-            ...(await authHeaders())
+            ...(await authHeaders()),
         },
         next: {
-            tags: ["dashboard:products"]
-        }
-    })
-    const products: Product[] = await response.json()
-    return (<div>
-        <FilteredCards products={products}/>
-    </div>)
-}
+            tags: ["dashboard:providers"],
+        },
+    });
+    const providers: Provider[] = await responseProviders.json();
 
-export default ProductsPage;
+    return (
+        <div className="w-full flex flex-col items-center justify-center p-4">
+            <FormCreateProduct providers={providers} />
+        </div>
+    );
+}

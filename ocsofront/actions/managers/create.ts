@@ -13,7 +13,7 @@ export default async function createManager(formData: FormData){
     method: "POST",
     body: JSON.stringify(manager),
     headers: {
-        ...(await authHeaders),
+        ...(await authHeaders()),
     }
   })
   if(response.status === 201) revalidateTag("dashboard:managers")

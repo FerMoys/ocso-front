@@ -18,11 +18,11 @@ export default async function updateManager(managerId: string, formData: FormDat
     method: "PATCH",
     body: JSON.stringify(manager),
     headers: {
-        ...(await authHeaders),
+        ...(await authHeaders()),
         'content-type': 'application/json'
     }
   })
-  if(response.status === 201) {
+  if(response.status === 200) {
     revalidateTag("dashboard:managers")
     revalidateTag(`dashboard:managers:${managerId}`)
     redirect("/dashboard/managers")

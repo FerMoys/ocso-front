@@ -1,17 +1,14 @@
-// app/dashboard/providers/page.tsx
 import { API_URL } from "@/app/constants";
 import { authHeaders } from "@/helpers/authHeaders";
 import ProviderCard from "./_components/ProviderCard";
+import AddProviderButton from "./_components/AddProviderButton"; // <-- Importamos el componente del modal
 import { Provider } from "@/entities";
-import Link from "next/link";
-import { Button } from "@nextui-org/react";
-import { LuPlus } from "react-icons/lu";
 
 const ProviderPage = async () => {
     try {
         const response = await fetch(`${API_URL}/providers`, {
             headers: {
-                ...(await authHeaders()) // <-- Añadidos los paréntesis ()
+                ...(await authHeaders())
             },
             next: {
                 tags: ["dashboard:providers"]
@@ -24,7 +21,6 @@ const ProviderPage = async () => {
 
         const providers: Provider[] = await response.json();
 
-        // Validamos que sea un arreglo antes de mapear
         if (!Array.isArray(providers)) {
             return (
                 <p className="text-red-500 font-medium">
@@ -34,15 +30,19 @@ const ProviderPage = async () => {
         }
 
         return (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-10">
-                <Button className="w-fit" color="primary">
-                    <LuPlus size="20"/>
-                </Button>
-                {providers.map((provider: Provider) => (
-                    <Link href= {{pathname: `/dashboard/providers/${provider.providerId}`}}>
-                    <ProviderCard provider={provider} key={provider.providerId} />
-                    </Link>
-                ))}
+            <div className="w-full p-6 flex flex-col gap-6">
+                <div className="flex justify-between items-center">
+                    <h1 className="text-2xl font-bold text-gray-800">Proveedores OCSO</h1>
+                    {/* Botón que abre el Modal */}
+                    <AddProviderButton />
+                </div>
+
+                {/* Cuadrícula de proveedores */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {providers.map((provider: Provider) => (
+                        <ProviderCard provider={provider} key={provider.providerId} />
+                    ))}
+                </div>
             </div>
         );
     } catch (error) {

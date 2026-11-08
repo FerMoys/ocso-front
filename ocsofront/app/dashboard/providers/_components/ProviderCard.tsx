@@ -27,9 +27,9 @@ export default async function ProviderCard({ provider }: { provider: Provider })
                         Teléfono: <b>{provider.providerPhoneNumber}</b>
                     </p>
                     {
-                        provider.products ? (
+                        provider?.products ? (
                             <p className="mt-2 text-sm text-gray-500">
-                                Tiene <b>{provider.products.length}</b> productos
+                                Tiene <b>{provider?.products?.length}</b> productos
                             </p>
                         ) : (
                             <p className="mt-2 text-sm text-gray-500">No tiene productos</p>

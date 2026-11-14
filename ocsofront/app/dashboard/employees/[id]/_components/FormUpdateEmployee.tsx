@@ -1,9 +1,12 @@
+import updateEmployee from "@/actions/employees/update";
 import { Employee } from "@/entities";
 import { Button, Input } from "@nextui-org/react";
 
 export default function FormUpdateEmployee({ employee }: { employee: Employee }) {
+    const {id} = employee;
+    const updateEmployeeById = updateEmployee.bind(null, id)
     return (
-        <form className="max-w-xl w-full bg-white p-8 rounded-2xl shadow-lg border border-gray-100 flex flex-col gap-6">
+        <form action={updateEmployeeById} className="max-w-xl w-full bg-white p-8 rounded-2xl shadow-lg border border-gray-100 flex flex-col gap-6">
             <div className="border-b pb-4">
                 <h2 className="text-xl font-bold text-gray-800">Actualizar Empleado</h2>
             </div>
@@ -38,7 +41,6 @@ export default function FormUpdateEmployee({ employee }: { employee: Employee })
                     radius="lg"
                 />
                 
-                {/* Campo de tipo file optimizado visualmente */}
                 <div className="flex flex-col gap-1.5 pt-1">
                     <label className="text-xs font-semibold text-gray-600 ml-1">Actualizar Fotografía</label>
                     <input 

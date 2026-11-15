@@ -1,49 +1,47 @@
+
 import { API_URL } from "@/app/constants";
-import { Employee } from "@/entities";
+import { Employee, Location } from "@/entities";
 import { authHeaders } from "@/helpers/authHeaders";
+
 import EmployeeCard from "./_components/EmployeeCard";
 import EmployeePhotoCard from "./_components/EmployeePhotoCard";
 import AddEmployeeButton from "./_components/AddEmployeeButton";
+import ListEmployees from "./_components/ListEmployees";
 
 const EmployeesPage = async () => {
-    const response = await fetch(`${API_URL}/employees`, {
+
+    // Obtener empleados
+    const responseEmployees = await fetch(`${API_URL}/employees`, {
         headers: {
             ...(await authHeaders())
-        }
-    })
-    const employees: Employee[] = await response.json()
+        },
+        cache: "no-store"
+    });
+
+    const employees: Employee[] = await responseEmployees.json();
+
+    // Obtener tiendas
+    const responseLocations = await fetch(`${API_URL}/locations`, {
+        headers: {
+            ...(await authHeaders())
+        },
+        cache: "no-store"
+    });
+
+    const locations: Location[] = await responseLocations.json();
 
     return (
         <div className="flex flex-col h-[90vh] gap-4 overflow-y-auto p-10">
-
-            {/* Botón en la esquina superior derecha */}
             <div className="flex w-full justify-end">
-            <AddEmployeeButton />
+                <AddEmployeeButton stores={locations} />
             </div>
 
-            {/* Tarjetas de empleados */}
             <div className="flex flex-wrap gap-4">
-            {employees.map((employee: Employee) => {
-                if (employee.employeePhoto != null) {
-                return (
-                    <EmployeePhotoCard
-                    key={employee.id}
-                    employee={employee}
-                    />
-                );
-                } else {
-                return (
-                    <EmployeeCard
-                    key={employee.id}
-                    employee={employee}
-                    />
-                );
-                }
-            })}
+               <ListEmployees employees={employees} locations={locations}/>
             </div>
 
         </div>
     );
-}
+};
 
 export default EmployeesPage;

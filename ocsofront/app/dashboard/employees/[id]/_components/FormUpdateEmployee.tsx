@@ -1,8 +1,18 @@
 import updateEmployee from "@/actions/employees/update";
 import { Employee } from "@/entities";
 import { Button, Input } from "@nextui-org/react";
+import SelectLocation from "./SelectLocation";
+import { API_URL } from "@/app/constants";
+import { authHeaders } from "@/helpers/authHeaders";
 
-export default function FormUpdateEmployee({ employee }: { employee: Employee }) {
+export default async function FormUpdateEmployee({ employee }: { employee: Employee }) {
+    const responseLocations = await fetch(`${API_URL}/locations`, {
+            headers: {
+                ...(await authHeaders())
+            }
+        })
+        const locations = await responseLocations.json()
+    
     const {id} = employee;
     const updateEmployeeById = updateEmployee.bind(null, id)
     return (
@@ -49,6 +59,7 @@ export default function FormUpdateEmployee({ employee }: { employee: Employee })
                         className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#FFB336]/20 file:text-[#F74C39] hover:file:bg-[#FFB336]/30 text-sm text-gray-500 cursor-pointer"
                     />
                 </div>
+                <SelectLocation stores={locations}/>
             </div>
 
             <div className="flex justify-end gap-3 pt-4 border-t">

@@ -13,7 +13,6 @@ export default function EmployeePhotoCard({ employee }: { employee: Employee }) 
 
     return (
         <Card
-            isPressable
             onPress={handleNavigate}
             className="h-72 w-full sm:w-[300px] border-2 border-transparent hover:border-[#F74C39] transition-all shadow-md hover:shadow-xl bg-white relative overflow-hidden cursor-pointer"
         >

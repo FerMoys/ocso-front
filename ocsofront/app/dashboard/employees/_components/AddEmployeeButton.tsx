@@ -12,8 +12,15 @@ import {
 } from "@nextui-org/react";
 import { LuPlus } from "react-icons/lu";
 import createEmployee from "@/actions/employees/create";
+import SelectLocation from "../[id]/_components/SelectLocation";
 
-export default function AddEmployeeButton() {
+import { Location } from "@/entities";
+
+export default function AddEmployeeButton({
+    stores
+}: {
+    stores: Location[]
+}) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [submitting, setSubmitting] = useState(false);
 
@@ -91,6 +98,9 @@ export default function AddEmployeeButton() {
                         name="employeePhoto"
                         className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#FFB336]/20 file:text-[#F74C39] hover:file:bg-[#FFB336]/30 text-sm text-gray-500 cursor-pointer"
                     />
+                    <>
+                    <SelectLocation stores={stores} />
+                    </>
                 </div>
                             </ModalBody>
                             <ModalFooter>

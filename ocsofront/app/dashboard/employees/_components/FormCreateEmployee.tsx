@@ -1,9 +1,18 @@
 import createEmployee from "@/actions/employees/create";
+import { API_URL } from "@/app/constants";
 import { Employee } from "@/entities";
+import { authHeaders } from "@/helpers/authHeaders";
 import { Button, Input } from "@nextui-org/react";
+import SelectLocation from "../[id]/_components/SelectLocation";
 
-export default function FormCreateEmployee({ employee }: { employee: Employee }) {
+export default async function FormCreateEmployee() {
 
+    const responseLocations = await fetch(`${API_URL}/locations`, {
+        headers: {
+            ...(await authHeaders())
+        }
+    })
+    const locations = await responseLocations.json()
     return (
         <form action={createEmployee} className="max-w-xl w-full bg-white p-8 rounded-2xl shadow-lg border border-gray-100 flex flex-col gap-6">
             <div className="border-b pb-4">
@@ -47,6 +56,7 @@ export default function FormCreateEmployee({ employee }: { employee: Employee })
                         className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#FFB336]/20 file:text-[#F74C39] hover:file:bg-[#FFB336]/30 text-sm text-gray-500 cursor-pointer"
                     />
                 </div>
+                <SelectLocation stores={locations} />
             </div>
 
             <div className="flex justify-end gap-3 pt-4 border-t">

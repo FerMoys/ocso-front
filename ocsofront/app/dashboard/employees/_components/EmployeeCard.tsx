@@ -1,7 +1,15 @@
+
 'use client';
 
 import { Employee } from "@/entities";
-import { Button, Card, CardBody, CardFooter, CardHeader, Divider } from "@nextui-org/react";
+import {
+    Button,
+    Card,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    Divider
+} from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 
 export default function EmployeeCard({ employee }: { employee: Employee }) {
@@ -13,11 +21,19 @@ export default function EmployeeCard({ employee }: { employee: Employee }) {
 
     return (
         <Card
-            isPressable
-            onPress={handleNavigate}
-            className="h-72 w-full sm:w-[300px] border-2 border-transparent hover:border-[#F74C39] transition-all shadow-md hover:shadow-xl bg-white flex flex-col justify-between cursor-pointer"
+            className="h-72 w-full sm:w-[300px] border-2 border-transparent hover:border-[#F74C39] transition-all shadow-md hover:shadow-xl bg-white flex flex-col justify-between"
         >
-            <div>
+            <div
+                onClick={handleNavigate}
+                className="cursor-pointer flex-1"
+                role="link"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                        handleNavigate();
+                    }
+                }}
+            >
                 <CardHeader className="text-gray-900 font-bold text-lg pt-4 pb-2">
                     {`${employee.employeeName} ${employee.employeeLastName}`}
                 </CardHeader>
@@ -28,6 +44,7 @@ export default function EmployeeCard({ employee }: { employee: Employee }) {
                     <p className="text-sm text-gray-700">
                         Correo: <span className="font-normal">{employee.employeeEmail}</span>
                     </p>
+
                     <p className="text-sm text-gray-700">
                         Número de teléfono: <span className="font-normal">{employee.employeePhoneNumber}</span>
                     </p>
@@ -35,15 +52,12 @@ export default function EmployeeCard({ employee }: { employee: Employee }) {
             </div>
 
             <CardFooter className="py-2 px-4 pb-4">
-                <Button 
-                    variant="bordered" 
-                    size="sm" 
-                    radius="full" 
+                <Button
+                    variant="bordered"
+                    size="sm"
+                    radius="full"
                     className="font-medium"
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        router.push(`/dashboard/employees/${employee.id}`);
-                    }}
+                    onPress={handleNavigate}
                 >
                     Actualizar datos
                 </Button>

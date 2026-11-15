@@ -33,10 +33,10 @@ export default function EmployeeDataCard({employee}: {employee:Employee}){
                         <span className="text-xs font-medium text-gray-400">Tienda</span>
                         <Link 
                             className="underline text-[#F74C39] hover:opacity-80 transition-opacity" 
-                            href={`/dashboard?store=${employee.location.locationId}`}
+                            href={`/dashboard?store=${employee.location?.locationId}`}
                         >
                             <span className="font-semibold text-gray-700">
-                                {employee.location.locationName || "Sin nombre"}
+                                {employee.location?.locationName || "Sin tienda"}
                             </span>
                         </Link>
                     </div>

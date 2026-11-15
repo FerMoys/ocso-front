@@ -3,6 +3,10 @@ import { API_URL } from "@/app/constants";
 import { authHeaders } from "@/helpers/authHeaders";
 import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
 import Link from "next/link";
+import ModalGeneric from "../../_components/ModalGeneric";
+import FormUpdateUserManager from "./FormUpdateUser";
+import { LuPlus } from "react-icons/lu";
+import FormCreateUserManager from "./FormCreateUserManager";
 
 export default async function ManagerCard() {
     try {

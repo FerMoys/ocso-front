@@ -11,6 +11,10 @@ import Link from "next/link";
 import DeleteManagerButton from "../_components/DeleteManagerButton";
 import UpdateManager from "./UpdateManager";
 import FormUpdateManager from "./FormUpdateManager";
+import ModalGeneric from "../../_components/ModalGeneric";
+import { LuPlus } from "react-icons/lu";
+import FormUpdateUserManager from "./FormUpdateUser";
+import FormCreateUserManager from "./FormCreateUserManager";
 
 export default function ManagerDetailPage({
     manager,
@@ -25,6 +29,17 @@ export default function ManagerDetailPage({
                 <h3 className="text-2xl font-bold text-gray-800">
                     {manager.managerFullName}
                 </h3>
+                {
+                                                        manager.user ? (
+                                                            <ModalGeneric icon={<LuPlus size={20}/>}>
+                                                                <FormUpdateUserManager user={manager.user}/>
+                                                            </ModalGeneric>
+                                                        ) : (
+                                                            <ModalGeneric icon={<LuPlus size={20}/>}>
+                                                                <FormCreateUserManager managerId={manager.managerId}/>
+                                                            </ModalGeneric>
+                                                        )
+                                                    }
             </CardHeader>
 
             <Divider />

@@ -1,6 +1,7 @@
 import { Employee } from "@/entities";
 import { Card, CardBody, CardHeader, Divider, Image } from "@nextui-org/react";
 import Link from "next/link";
+import DeleteEmployee from "./DeleteEmployee";
 
 export default function EmployeeDataCard({employee}: {employee:Employee}){
     return(
@@ -28,6 +29,7 @@ export default function EmployeeDataCard({employee}: {employee:Employee}){
                     <div className="flex flex-col">
                         <span className="text-xs font-medium text-gray-400">Número de teléfono</span>
                         <span className="font-semibold text-gray-700">{employee.employeePhoneNumber || "No registrado"}</span>
+                        
                     </div>
                     <div className="flex flex-col">
                         <span className="text-xs font-medium text-gray-400">Tienda</span>
@@ -39,6 +41,9 @@ export default function EmployeeDataCard({employee}: {employee:Employee}){
                                 {employee.location?.locationName || "Sin tienda"}
                             </span>
                         </Link>
+                        <div className="flex flex-col items-center">
+                        <DeleteEmployee id={employee.id}/>
+                        </div>
                     </div>
                 </CardBody>
             </Card>

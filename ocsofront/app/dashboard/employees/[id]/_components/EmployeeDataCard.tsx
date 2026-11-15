@@ -1,18 +1,31 @@
-import { Employee } from "@/entities";
+import { Employee, Location } from "@/entities";
 import { Card, CardBody, CardHeader, Divider, Image } from "@nextui-org/react";
 import Link from "next/link";
 import DeleteEmployee from "./DeleteEmployee";
+import CreateUser from "./CreateUser";
+import FormCreateUser from "./FormCreateUser";
+import FormUpdateEmployee from "./FormUpdateEmployee";
+import FormUpdateUserEmployee from "./FormUpdateUserEmployee";
 
-export default function EmployeeDataCard({employee}: {employee:Employee}){
+export default function EmployeeDataCard({employee, locations}: {employee:Employee, locations: Location[]}){
     return(
           <Card className="w-full lg:w-[400px] shadow-md bg-white border border-gray-100 rounded-2xl p-4 flex flex-col items-center">
                 <CardHeader className="flex flex-col items-center pb-2">
-                    <div className="relative size-40 rounded-full overflow-hidden shadow-inner mb-4 border-4 border-[#FFB336]/30">
-                        <Image 
+                    <div >
+                       {/** <Image 
                             src={employee.employeePhoto} 
                             alt={`${employee.employeeName} photo`}
                             className="object-cover w-full h-full size-40"
-                        />
+                        /> */}
+                        <CreateUser employeeId={employee.id} photo={employee.employeePhoto}>
+                            {
+                                !employee.user ? (
+                                    <FormCreateUser employeeId={employee.id} />
+                                ) : (
+                                    <FormUpdateUserEmployee user={employee.user} />
+                                )
+                            }
+                        </CreateUser>
                     </div>
                     <h1 className="text-xl font-bold text-gray-800 text-center">
                         {employee.employeeName} {employee.employeeLastName}

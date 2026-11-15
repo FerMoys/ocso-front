@@ -1,7 +1,20 @@
-export default function ManagersPage() {
-    return (
-        <p className="text-gray-500">
-            Selecciona un manager de la lista para ver sus detalles.
-        </p>
-    );
+import { LuPlus } from "react-icons/lu"
+import ModalGeneric from "../_components/ModalGeneric"
+import FormCreateManager from "./_components/FormCreateManager"
+import { API_URL } from "@/app/constants"
+import { authHeaders } from "@/helpers/authHeaders"
+import { Location } from "@/entities"
+
+const ManagersPage = async () => {
+    const responseStores = await fetch(`${API_URL}/locations`, {
+        headers:{
+            ...(await authHeaders())
+        }
+    })
+    const stores: Location[] = await responseStores.json()
+    return <ModalGeneric icon={<LuPlus size="20"/>}>
+        <FormCreateManager stores={stores}/>
+        </ModalGeneric>
 }
+
+export default ManagersPage;

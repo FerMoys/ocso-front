@@ -44,3 +44,12 @@ export interface Product{
     provider: Provider
 }
 
+export interface User {
+    userId: string;
+    userEmail: string;
+    userPassword: string;
+    userRoles: string[];
+    manager: Manager;
+    employee: Employee;
+}
+

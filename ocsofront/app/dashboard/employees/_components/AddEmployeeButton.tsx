@@ -34,7 +34,7 @@ export default function AddEmployeeButton({
             
             onOpenChange();
         } catch (error) {
-            console.error("Error al crear el proveedor:", error);
+            console.error("Error al crear el empleado:", error);
         } finally {
             setSubmitting(false);
         }

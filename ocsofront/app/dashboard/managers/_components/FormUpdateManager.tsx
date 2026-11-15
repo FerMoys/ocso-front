@@ -4,6 +4,7 @@ import { Button, Input } from "@nextui-org/react"
 import SelectStore from "./SelectStore"
 import { API_URL } from "@/app/constants"
 import { authHeaders } from "@/helpers/authHeaders"
+import { LuPen } from "react-icons/lu"
 export default async function FormUpdateManager({manager}: {manager: Manager}){
     const updateManagerWithId = updateManager.bind(null, manager.managerId)
     const responseStores = await fetch(`${API_URL}/locations`, {
@@ -45,7 +46,7 @@ export default async function FormUpdateManager({manager}: {manager: Manager}){
             />
             <SelectStore stores={stores} defaultStore={manager?.location?.locationId} />
             <Button color="primary" type="submit">
-                Actualizar
+                <LuPen size="20"/>
             </Button>
         </form>
     )

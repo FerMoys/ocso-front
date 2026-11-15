@@ -9,6 +9,7 @@ import {
   ModalHeader,
   ModalBody,
 } from "@nextui-org/react";
+import { LuPenLine } from "react-icons/lu";
 
 interface UpdateLocationProps {
   children: ReactNode;
@@ -22,11 +23,12 @@ export default function UpdateLocation({
   return (
     <>
       <Button
-        className="h-12 bg-[#F74C39] text-base font-semibold text-white shadow-md transition-all hover:bg-[#DF3D2C] hover:shadow-lg"
+        className="h-12  text-base font-semibold text-white shadow-md transition-all  hover:shadow-lg"
         radius="lg"
+        color="primary"
         onPress={() => setIsOpen(true)}
       >
-        Actualizar tienda
+        <LuPenLine size="20"/>
       </Button>
 
       <Modal
